@@ -1,5 +1,12 @@
 {
     "compilerOptions": {
+      // baseUrl和paths 配合 webpack.base中的alias别名
+      "baseUrl": "",
+      "paths": {
+        "@/*": [
+          "src/*"
+        ]
+      },
       "target": "ESNext",
       "lib": ["DOM", "DOM.Iterable", "ESNext"],
       "allowJs": false,
