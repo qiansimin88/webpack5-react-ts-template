@@ -2,7 +2,7 @@
  * @Author: qsm 348867341@qq.com
  * @Date: 2023-07-25 03:47:04
  * @LastEditors: qsm 348867341@qq.com
- * @LastEditTime: 2023-07-26 04:25:30
+ * @LastEditTime: 2023-10-26 06:05:00
  * @FilePath: /webpack5-react-ts-template/build/webpack.prod.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -40,6 +40,7 @@ module.exports = merge(baseConfig, {
           minChunks: 2, // 只要使用两次就提取出来
           chunks: 'initial', // 只提取初始化就能获取到的模块,不管异步的
           minSize: 0, // 提取代码体积大于0就提取出来
+          reuseExistingChunk: true  //表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。
         }
       }
     },
