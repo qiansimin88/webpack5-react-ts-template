@@ -25,22 +25,25 @@ module.exports = merge(baseConfig, {
   optimization: {
     // 分隔代码
     splitChunks: {
+      // 分组
       cacheGroups: {
+        // 第三方模块
         vendors: {
           // 提取node_modules代码
+          priority: 1, // 提取优先级为1 优先抽离进vendors chunk
           test: /node_modules/, // 只匹配node_modules里面的模块
-          name: "vendors", // 提取文件命名为vendors,js后缀和chunkhash会自动加
-          minChunks: 1, // 只要使用一次就提取出来
-          chunks: "initial", // 只提取初始化就能获取到的模块,不管异步的
-          minSize: 0, // 提取代码体积大于0就提取出来
-          priority: 1, // 提取优先级为1
+          name: "vendors", //  chunk 名字 提取文件命名为vendors,js后缀和chunkhash会自动加
+          minChunks: 1, // 只要使用一次就提取出来 不然改动一次代码就要重新打包一次node_module里面的代码 耗时
+          chunks: "all", // 只提取初始化就能获取到的模块,不管异步的 all: 入口和异步代码都要管
+          minSize: 2000, // 提取代码体积大于2 kb就提取出来  太小的包抽离出来没意义
         },
+        // 公共模块
         commons: {
           // 提取页面公共代码
-          name: "commons", // 提取文件命名为commons
-          minChunks: 2, // 只要使用两次就提取出来
-          chunks: "initial", // 只提取初始化就能获取到的模块,不管异步的
-          minSize: 0, // 提取代码体积大于0就提取出来
+          name: "commons", // 提取文件命名为commons.js
+          minChunks: 2, // 只要使用两次就提取出来 因为一次的话 拆出来没任何意义 跟 第三方模块不同 一般第三方模块体积较大 所以第三方模块引用一次就要拆出来
+          chunks: "all", // 只提取初始化就能获取到的模块,不管异步的
+          minSize: 1000, // 提取代码体积大于1kb就提取出来
           reuseExistingChunk: true, //表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。
         },
       },

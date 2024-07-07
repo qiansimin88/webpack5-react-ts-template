@@ -39,7 +39,7 @@ module.exports = {
     rules: [
       {
         include: [path.resolve(__dirname, "../src")], // 只对项目src文件的ts,tsx进行loader解析
-        test: /.(ts|tsx)$/,
+        test: /.(ts|tsx|js|jsx)$/,
         // thread-loader 在这个loader之后的loader都新开web worker中心运行 多线程
         use: ["thread-loader", "babel-loader"],
         // webpack自动引入babel.config.js中的配置
@@ -125,7 +125,7 @@ module.exports = {
         type: "asset", // type选择asset
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024, // 小于10kb转base64位
+            maxSize: 10 * 1024, // 小于10kb转base 64位
           },
         },
         generator: {
